@@ -1,0 +1,1 @@
+module.exports.myAPIKey = "3b43d205e7444e4690c155751252209";
