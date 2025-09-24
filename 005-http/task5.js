@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+//const myAPIKey =  require('./config').myAPIKey;
 const https = require('https');
 const config =  require('dotenv').config;
 const yargs = require('yargs/yargs');
@@ -10,6 +11,7 @@ const city = argv['_'][0];
 
 const myAPIKey = config().parsed.myAPIKey;
 const url = `https://api.weatherapi.com/v1/current.json?key=${myAPIKey}&q=${city}&aqi=no`;
+console.log(url)
 
 https.get(url, (res) => {
     const { statusCode } = res;
