@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const fs = require('fs');
-const path = require('path');
-const stor = require('../storage/storage')
+const stor = require('../library/books')
 const Book = require('../classes/Book')
 
 router.get('/books', (req, res) => {
@@ -42,20 +40,24 @@ router.put('/books/:id', (req, res) => {
     const idx = books.findIndex( el => el.id === id)
 
     if (idx !== -1){
-        const {title, description, authors, favorite, fileCover, fileName} = req.body
-        books[idx].title = title
-        books[idx].description = description
-        books[idx].authors = authors
-        books[idx].favorite = favorite
-        books[idx].fileCover = fileCover
-        books[idx].fileName = fileName
+        const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
+        books[idx] = {
+            ...books[idx],
+            title,
+            description,
+            authors,
+            favorite,
+            ileCover,
+            fileName,
+            fileBook
+        }
  
         res.status(200)
         res.json(books[idx])
     }
     else{
         res.status(404)
-        res.json("Книга не найдена")
+        res.json("404 | Книга не найдена")
     }    
 })
 
@@ -71,7 +73,7 @@ router.delete('/books/:id', (req, res) => {
     }
     else{
         res.status(404)
-        res.json("Книга не найдена") 
+        res.json("404 | Книга не найдена") 
     }    
 })   
 
